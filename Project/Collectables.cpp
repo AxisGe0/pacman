@@ -1,7 +1,5 @@
+#include <SFML/Graphics.hpp>
 #include "Collectables.h"
 
-Collectables::Collectables() {}
-
-int Collectables::addPoints(Pacman pacman) {
-    return 0;
-}
+Collectables::Collectables() {};
+void Collectables::addPoints(int points){};

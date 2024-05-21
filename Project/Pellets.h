@@ -1,3 +1,4 @@
+
 #ifndef PELLETS_H
 #define PELLETS_H
 
@@ -11,15 +12,22 @@ class Pellets : public Collectables {
         int gridSize;
         int cellSize;
         int points = 10;
-        int **maze;
+        int** maze;
         sf::SoundBuffer buffer;
         sf::Sound sound;
-
     public:
         Pellets();
-        Pellets(int gs, int width, int **mz);
-        void draw(sf::RenderWindow& window) override;
+        Pellets(int gs, int width, int** mz);
+        virtual void draw(sf::RenderWindow& window) override;
         int addPoints(Pacman pacman);
+        
+        // Getter functions
+        int getGridSize() const;
+        int getCellSize() const;
+        int getPoints() const;
+        int** getMaze() const;
+        sf::SoundBuffer& getBuffer();
+        sf::Sound& getSound();
 };
 
-#endif
+#endif // PELLETS_H

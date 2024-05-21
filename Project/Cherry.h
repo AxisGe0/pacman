@@ -2,8 +2,9 @@
 #define CHERRY_H
 
 #include "Collectables.h"
+#include "Cherry.h"
 #include "Pacman.h"
-
+#include <SFML/Graphics.hpp>
 class Cherry : public Collectables {
     private:
         int gridSize;
@@ -15,9 +16,15 @@ class Cherry : public Collectables {
 
     public:
         Cherry();
-        Cherry(int gs, int width, int **mz);
-        void draw(sf::RenderWindow& window) override;
-        int addPoints(Pacman pacman) override;
+        Cherry(int gs,int width,int ** mz);
+        int getGridSize();
+        int getCellSize();
+        int getPoints();
+        int getNumber();
+        int** getMaze();
+        sf::Texture getTexture();
+        virtual void draw(sf::RenderWindow& window);
+        int addPoints(Pacman pacman);
         void placeRandomly();
 };
 

@@ -1,10 +1,17 @@
 #include "Pellets.h"
-Pellets::Pellets(){}
-        
-Pellets::Pellets(int gs,int width,int ** mz) : gridSize(gs), cellSize(width/gridSize), maze(mz) {
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+// Constructor definition
+Pellets::Pellets() {}
+
+Pellets::Pellets(int gs, int width, int** mz) 
+    : gridSize(gs), cellSize(width / gridSize), maze(mz) {
     buffer.loadFromFile("sounds/sound_eating.mp3");
     sound.setBuffer(buffer);
 }
+
+// draw function definition
 void Pellets::draw(sf::RenderWindow& window) {
     sf::CircleShape dot(cellSize / 12);
     dot.setFillColor(sf::Color::White);
@@ -19,16 +26,42 @@ void Pellets::draw(sf::RenderWindow& window) {
     }
 }
 
-int Pellets::addPoints(Pacman pacman){
+// addPoints function definition
+int Pellets::addPoints(Pacman pacman) {
     sf::Vector2f pos = pacman.getPosition();
-    int X = pos.x / (cellSize);
-    int Y = pos.y / (cellSize);
-    if(maze[Y][X] == 0){
+    int X = pos.x / cellSize;
+    int Y = pos.y / cellSize;
+    if (maze[Y][X] == 0) {
         maze[Y][X] = 8;
-        if(sound.getStatus() != sf::Sound::Status::Playing){
+        if (sound.getStatus() != sf::Sound::Status::Playing) {
             sound.play();
         }
         return points;
     }
     return 0;
-};
+}
+
+// Getter functions
+int Pellets::getGridSize() const {
+    return gridSize;
+}
+
+int Pellets::getCellSize() const {
+    return cellSize;
+}
+
+int Pellets::getPoints() const {
+    return points;
+}
+
+int** Pellets::getMaze() const {
+    return maze;
+}
+
+sf::SoundBuffer& Pellets::getBuffer() {
+    return buffer;
+}
+
+sf::Sound& Pellets::getSound() {
+    return sound;
+}

@@ -1,11 +1,11 @@
+
 #include "Entities.h"
 
-Entities::Entities() {}
+#include <SFML/Graphics.hpp>
 
-bool Entities::move(int direction, Maze maze, float time) {
-    return false; // Default implementation returns false
-}
+#include "Elements.h"
+#include "Maze.h"
 
-float Entities::getSpeed() {
-    return speed; // Default implementation returns speed
-}
+Entities::Entities() {};
+bool Entities::move(int direction, Maze maze, float time) { return false; }
+float Entities::getSpeed() { return speed; }
