@@ -1,96 +1,85 @@
 #include "Cherry.h"
 
-// Default constructor for the Cherry class
+// Default constructor for Cherry
 Cherry::Cherry() {}
 
-// Parameterized constructor for the Cherry class
-// Initializes gridSize, cellSize, and maze
-// Attempts to load the cherry texture and places the cherry randomly in the maze
-Cherry::Cherry(int gs, int width, int** mz) 
-    : gridSize(gs), cellSize(width / gridSize), maze(mz) {
-    // Load the texture for the cherry
+ // Constructor for Cherry with parameters
+Cherry::Cherry(int gs, int width, int **mz) : gridSize(gs), cellSize(width / gridSize), maze(mz) {
+    // Load cherry texture from file
     if (!cherryTexture.loadFromFile("images/cherry.png")) {
         std::cerr << "Error: Failed to load cherry texture file." << std::endl;
     } else {
-        // Place the cherry randomly in the maze
-        placeRandomly();
+        placeRandomly(); // Place cherry randomly on the maze
     }
 }
 
-// Draws the cherry on the given window
+// Draws the cherry on the game window
 void Cherry::draw(sf::RenderWindow& window) {
     sf::RectangleShape cherry(sf::Vector2f(cellSize, cellSize));
     cherry.setFillColor(sf::Color::White);
     cherry.setTexture(&cherryTexture);
-
-    // Iterate over each cell in the grid
     for (int y = 0; y < gridSize; ++y) {
         for (int x = 0; x < gridSize; ++x) {
-            // If the cell contains a cherry (indicated by the value 3)
-            if (maze[y][x] == 3) {
-                // Set the position of the cherry and draw it
+            if (maze[y][x] == 3) { // Check if the cell has a cherry
                 cherry.setPosition(x * cellSize, y * cellSize);
-                window.draw(cherry);
+                window.draw(cherry); // Draw the cherry
             }
         }
     }
 }
 
-// Adds points if Pacman eats a cherry and places a new cherry randomly
+// Calculates and returns points if Pacman collects the cherry
 int Cherry::addPoints(Pacman pacman) {
-    // Get Pacman's position
     sf::Vector2f pos = pacman.getPosition();
     int X = pos.x / cellSize;
     int Y = pos.y / cellSize;
-
-    // Check if Pacman is on a cherry cell
-    if (maze[Y][X] == 3) {
-        // Mark the cell as empty (or eaten) and place a new cherry
-        maze[Y][X] = 8;
-        placeRandomly();
-        // Return the points for eating a cherry
-        return points;
+    if (maze[Y][X] == 3) { // Check if Pacman is on a cherry cell
+        maze[Y][X] = 8; // Mark the cell as empty
+        placeRandomly(); // Place a new cherry randomly
+        return points; // Return the points awarded for collecting the cherry
     }
-    // Return 0 points if no cherry was eaten
     return 0;
 }
 
-// Places cherries randomly in the maze
+// Places the cherry randomly on the maze
 void Cherry::placeRandomly() {
     int count = 0;
     while (count < n) {
-        // Generate random coordinates
         int x = rand() % gridSize;
         int y = rand() % gridSize;
-        // Place a cherry if the cell is empty (value 0) or previously eaten (value 8)
-        if (maze[x][y] == 0 || maze[x][y] == 8) {
-            maze[x][y] = 3;
+        if (maze[x][y] == 0 || maze[x][y] == 8) { // Check if the cell is empty or previously had a cherry
+            maze[x][y] = 3; // Place the cherry
             count++;
         }
     }
 }
 
-// Getters for various private member variables
+// Getter for gridSize
 int Cherry::getGridSize() const {
     return gridSize;
 }
 
+// Getter for cellSize
 int Cherry::getCellSize() const {
     return cellSize;
 }
 
+// Getter for points
 int Cherry::getPoints() const {
     return points;
 }
 
+// Getter for n
 int Cherry::getN() const {
     return n;
 }
 
+// Getter for maze
 int** Cherry::getMaze() const {
     return maze;
 }
 
+// Getter for cherryTexture
 sf::Texture Cherry::getCherryTexture() const {
     return cherryTexture;
 }

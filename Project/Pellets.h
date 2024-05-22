@@ -19,7 +19,7 @@ class Pellets : public Collectables {
         Pellets();
         Pellets(int gs, int width, int **mz);
         void draw(sf::RenderWindow& window) override;
-        int addPoints(Pacman pacman);
+        int addPoints(Pacman pacman) override;
         int getGridSize() const;
         int getCellSize() const;
         int getPoints() const;
