@@ -15,7 +15,7 @@ class SpeedDot : public Collectables {
         int gridSize; ///< Size of the game grid
         int cellSize; ///< Size of each cell in the grid
         int points = 50; ///< Points awarded for collecting the SpeedDot
-        int n = 3; ///< Additional attribute, purpose not specified
+        int n = 3; ///< Number of SpeedDots to be placed
         int **maze; ///< Pointer to a 2D array representing the game maze
         float scaleFactor = 1.0f; ///< Scale factor for rendering the SpeedDot
         bool isScalingDown = false; ///< Flag indicating if the SpeedDot is scaling down
