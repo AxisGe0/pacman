@@ -56,7 +56,7 @@ int SpeedDot::addPoints(Pacman &pacman) {
     sf::Vector2f pos = pacman.getPosition();
     int X = pos.x / cellSize;
     int Y = pos.y / cellSize;
-    pacman.increaseSpeed(false); // Reset Pacman's speed boost
+    pacman.increaseSpeed(false); // Ensure Pacman's speed boost status is updated
     if (maze[Y][X] == 2) { // Check if Pacman is on a SpeedDot cell
         maze[Y][X] = 8; // Mark the cell as empty
         pacman.increaseSpeed(true); // Increase Pacman's speed
