@@ -107,11 +107,15 @@ bool Maze::isWall(int x, int y) {
 // Sets up the initial maze layout from a file
 void Maze::setupMaze() {
     std::ifstream file { "maze.txt" };
-    int layout[gridSize][gridSize];
-    for (int i = 0; i < gridSize; ++i) {
-        for (int j = 0; j < gridSize; ++j) {
-            file >> layout[i][j];
-            maze[i][j] = layout[i][j];
+    if(!file) {
+        std::cerr << "Error: Failed to open maze file." << std::endl;
+    }else{
+        int layout[gridSize][gridSize];
+        for (int i = 0; i < gridSize; ++i) {
+            for (int j = 0; j < gridSize; ++j) {
+                file >> layout[i][j];
+                maze[i][j] = layout[i][j];
+            }
         }
     }
 }
